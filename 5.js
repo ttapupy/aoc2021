@@ -18,21 +18,25 @@ for (const { start, end } of coords) {
   let incrY = start.y < end.y;
   let incrX = start.x < end.x;
 
+  // part2
   if (start.x != end.x && start.y != end.y) {
     for (
       let [x, y] = [start.x, start.y];
       (incrY ? y <= end.y : y >= end.y) && (incrX ? x <= end.x : x >= end.x);
       (incrY ? y++ : y--) && (incrX ? x++ : x--)
     ) {
-      horizontals[x] ? horizontals[x].push(y) : horizontals[x] = [y];
+      horizontals[x] ? horizontals[x].push(y) : (horizontals[x] = [y]);
     }
-  } else if (start.x == end.x) {
-    for (let y = start.y; incrY ? y <= end.y : y >= end.y; incrY ? y++ : y--) {
-      horizontals[start.x] ? horizontals[start.x].push(y) : horizontals[start.x] = [y]
-    }
+    // part1
   } else {
-    for (let x = start.x; incrX ? x <= end.x : x >= end.x; incrX ? x++ : x--) {
-      horizontals[x] ?  horizontals[x].push(start.y) : horizontals[x] = [start.y];
+    for (let y = start.y; incrY ? y <= end.y : y >= end.y; incrY ? y++ : y--) {
+      for (
+        let x = start.x;
+        incrX ? x <= end.x : x >= end.x;
+        incrX ? x++ : x--
+      ) {
+        horizontals[x] ? horizontals[x].push(y) : (horizontals[x] = [y]);
+      }
     }
   }
 }
