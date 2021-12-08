@@ -7,7 +7,7 @@ def smallest_dist(pos)
     fuel = pos.inject(0) do |sum, n|
       # sum + (n - pos_val).abs # part1
       sum + (1..(n - pos_val).abs).sum
-    end  
+    end
     if dist > 0
       dist = [fuel, dist].min
     else
